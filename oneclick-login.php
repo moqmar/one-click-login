@@ -68,14 +68,16 @@ class OneClickLogin {
 						<?php endif; ?>
 						<td style="vertical-align:middle"><?php echo $databases[$database] ?></td>	
 						<td>
-							<form action="" method="post">
+							<form action="" method="post" style="display: flex">
 								<input type="hidden" name="auth[driver]" value="<?php echo $this->driver; ?>">
 								<input type="hidden" name="auth[server]" value="<?php echo $host; ?>">
 								<input type="hidden" name="auth[username]" value="<?php echo h($server["username"]); ?>">
-								<input type="hidden" name="auth[password]" value="<?php echo h($server["pass"]); ?>">
+								<?php if (h($server["pass"])) { ?><input type="hidden" name="auth[password]" value="<?php echo h($server["pass"]); ?>">
+								<?php } else { ?><input value="postgres" type="password" name="auth[password]" style="min-width: none; width: 10em; margin: 0;">
+								<?php } ?>
 								<input type='hidden' name="auth[db]" value="<?php echo h($database); ?>"/>
 								<input type='hidden' name="auth[permanent]" value="1"/>
-								<input type="submit" value="<?php echo lang('Enter'); ?>">
+								<input type="submit" value="<?php echo lang('Enter'); ?>" style="margin: 0">
 							</form>
 						</td>
 					</tr>
